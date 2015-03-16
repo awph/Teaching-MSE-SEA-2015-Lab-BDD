@@ -38,6 +38,32 @@ public class Steps {
     assertNotNull(music);
     assertNotEquals("", music);
   }
+  
+  @Given("^there is an orchestra$")
+  public void there_is_an_orchestra() throws Throwable {
+    orchestra = new ArrayList<>();
+  }
 
+  @Given("^there is (\\d+) flute player in the the orchestra$")
+  public void there_is_flute_player_in_the_the_orchestra(int numberOfFlutes) throws Throwable {
+    for (int i = 0; i < numberOfFlutes; i++) {
+      orchestra.add(new Flute());
+    }
+  }
+
+  @When("^I ask the orchestra to play$")
+  public void i_ask_the_orchestra_to_play() throws Throwable {
+    i_ask_them_to_play();
+  }
+
+  @Then("^I hear the sound of flute$")
+  public void i_hear_the_sound_of_flute() throws Throwable {
+    assertNotEquals(-1, music.indexOf("piout"));
+  }
+
+  @Then("^I don't hear the sound of trumpet$")
+  public void i_don_t_hear_the_sound_of_trumpet() throws Throwable {
+    assertEquals(-1, music.indexOf("pouet"));
+  }
 
 }
